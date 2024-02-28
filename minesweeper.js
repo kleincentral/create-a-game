@@ -56,7 +56,19 @@ const checkForBomb = (cordX, cordY) => {
 
 const checkAdjacent = (cordX, cordY) => {
   console.log("checking...")
-  
+  if (cordX >= 4) {
+    // dont look below
+  }
+  if (cordX <= 0) {
+    // dont look above.
+  }
+  if (cordY <= 4) {
+    // dont look right.
+  }
+  if (cordY >= 0) {
+    // dont look left.
+  }
+  // look in directions, along with combination of directions.
 }
 
 checkForBomb(2,5)
