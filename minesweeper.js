@@ -38,4 +38,27 @@ const displayMinesweep = () => {
   }
 }
 
-displayMinesweep()
+const checkForBomb = (cordX, cordY) => {
+  cordX -= 1
+  cordY -= 1
+  if (minesweeperGrid[cordX][cordY] == "Bomb"){
+    console.log("Oh no death")  
+  } else if (minesweeperGrid[cordX][cordY] != "") {
+    console.log(minesweeperGrid[cordX][cordY])
+    minesweeperDisplay[cordX][cordY] = minesweeperGrid[cordX][cordY]
+  } else {
+    console.log("nothing")
+    minesweeperDisplay[cordX][cordY] = 0
+    checkAdjacent(cordX, cordY)
+  }
+  displayMinesweep()
+}
+
+const checkAdjacent = (cordX, cordY) => {
+  console.log("checking...")
+  
+}
+
+checkForBomb(2,5)
+checkForBomb(1,4)
+checkForBomb(1,1)
