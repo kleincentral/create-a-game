@@ -39,6 +39,7 @@ const displayMinesweep = () => {
 }
 
 const checkForBomb = (cordX, cordY) => {
+  console.log(cordX, cordY, "Index revealed")
   if (typeof (minesweeperDisplay[cordX][cordY]) == "number") {
     return
   }
@@ -47,7 +48,7 @@ const checkForBomb = (cordX, cordY) => {
     if (minesweeperGrid[cordX][cordY] == "Bomb") {
       console.log("Oh no death")
     } else if (minesweeperGrid[cordX][cordY] != "") {
-      console.log(minesweeperGrid[cordX][cordY])
+      console.log(minesweeperGrid[cordX][cordY], "Number")
       minesweeperDisplay[cordX][cordY] = minesweeperGrid[cordX][cordY]
     } else {
       console.log("nothing")
@@ -64,13 +65,61 @@ const checkForEmpty = (cordX, cordY) => {
   if (validSpaces[0] == 0 && validSpaces[1] == 0) {
     console.log("Check for Empty",cordX, cordY)
     checkForBomb(cordX+1, cordY+1)
+    checkForBomb(cordX+1, cordY)
     checkForBomb(cordX+1, cordY-1)
     checkForBomb(cordX, cordY+1)
     checkForBomb(cordX, cordY-1)
-    checkForBomb(cordX, cordY+1)
     checkForBomb(cordX-1, cordY-1)
     checkForBomb(cordX-1, cordY)
     checkForBomb(cordX-1, cordY+1)
+  }
+  else if (validSpaces[0] == 0 && validSpaces[1] == 1) {
+    checkForBomb(cordX+1, cordY+1)
+    checkForBomb(cordX+1, cordY)
+    checkForBomb(cordX, cordY+1)
+    checkForBomb(cordX-1, cordY)
+    checkForBomb(cordX-1, cordY+1)
+  }
+  else if (validSpaces[0] == 0 && validSpaces[1] == 2) {
+    checkForBomb(cordX+1, cordY)
+    checkForBomb(cordX+1, cordY-1)
+    checkForBomb(cordX, cordY-1)
+    checkForBomb(cordX-1, cordY-1)
+    checkForBomb(cordX-1, cordY)
+  }
+  else if (validSpaces[0] == 1 && validSpaces[1] == 0) {
+    checkForBomb(cordX+1, cordY+1)
+    checkForBomb(cordX+1, cordY)
+    checkForBomb(cordX+1, cordY-1)
+    checkForBomb(cordX, cordY+1)
+    checkForBomb(cordX, cordY-1)
+  }
+  else if (validSpaces[0] == 1 && validSpaces[1] == 1) {
+    checkForBomb(cordX+1, cordY+1)
+    checkForBomb(cordX+1, cordY)
+    checkForBomb(cordX, cordY+1)
+  }
+  else if (validSpaces[0] == 1 && validSpaces[1] == 2) {
+    checkForBomb(cordX+1, cordY)
+    checkForBomb(cordX+1, cordY-1)
+    checkForBomb(cordX, cordY-1)
+  }
+  else if (validSpaces[0] == 2 && validSpaces[1] == 0) {
+    checkForBomb(cordX, cordY+1)
+    checkForBomb(cordX, cordY-1)
+    checkForBomb(cordX-1, cordY-1)
+    checkForBomb(cordX-1, cordY)
+    checkForBomb(cordX-1, cordY+1)
+  }
+  else if (validSpaces[0] == 2 && validSpaces[1] == 1) {
+    checkForBomb(cordX, cordY+1)
+    checkForBomb(cordX-1, cordY)
+    checkForBomb(cordX-1, cordY+1)
+  }
+  else if (validSpaces[0] == 2 && validSpaces[1] == 2) {
+    checkForBomb(cordX, cordY-1)
+    checkForBomb(cordX-1, cordY-1)
+    checkForBomb(cordX-1, cordY)
   }
 }
 
@@ -117,9 +166,9 @@ const checkAdjacent = (cordX, cordY) => {
 
 }
 
-checkForBomb(1,4)
-checkForBomb(0,3)
+// checkForBomb(1,4)
+// checkForBomb(0,3)
 checkForBomb(1, 1)
-checkForBomb(0, 0)
+// checkForBomb(0, 0)
 console.log("ee")
-checkForBomb(3,1)
+// checkForBomb(3,1)
