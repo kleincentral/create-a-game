@@ -1,3 +1,5 @@
+const prompt = require('prompt-sync')();
+
 /** 
  * Minesweeper:
  * 
@@ -12,6 +14,14 @@
  * 6: If every space that is not a bomb has been dug up, the player wins.
  * 7: If the player digs up a bomb, they lose and restart the game.
  */
+
+let playingGame = true;
+
+while (playingGame) {
+  const guess = prompt('guess some coords separated by a space: ');
+  const coords = guess.split(' ')
+  checkForBomb(Number(coords[0]), Number(coords[1]))
+}
 
 let minesweeperGrid = [
   [[], [], [],  1,    1],
@@ -47,6 +57,7 @@ const checkForBomb = (cordX, cordY) => {
     console.log(cordX, cordY)
     if (minesweeperGrid[cordX][cordY] == "Bomb") {
       console.log("Oh no death")
+      playingGame = false;
     } else if (minesweeperGrid[cordX][cordY] != "") {
       console.log(minesweeperGrid[cordX][cordY], "Number")
       minesweeperDisplay[cordX][cordY] = minesweeperGrid[cordX][cordY]
@@ -168,7 +179,7 @@ const checkAdjacent = (cordX, cordY) => {
 
 // checkForBomb(1,4)
 // checkForBomb(0,3)
-checkForBomb(1, 1)
+// checkForBomb(1, 1)
 // checkForBomb(0, 0)
-console.log("ee")
+// console.log("ee")
 // checkForBomb(3,1)
