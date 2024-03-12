@@ -15,14 +15,6 @@ const prompt = require('prompt-sync')();
  * 7: If the player digs up a bomb, they lose and restart the game.
  */
 
-let playingGame = true;
-
-while (playingGame) {
-  const guess = prompt('guess some coords separated by a space: ');
-  const coords = guess.split(' ')
-  checkForBomb(Number(coords[0]), Number(coords[1]))
-}
-
 let minesweeperGrid = [
   [[], [], [],  1,    1],
   [[], [], [],  1,    "Bomb"],
@@ -134,6 +126,10 @@ const checkForEmpty = (cordX, cordY) => {
   }
 }
 
+const addFlag = (cordX, cordY) => {
+  minesweeperDisplay[cordX][cordY] = `🏳`
+  displayMinesweep()
+}
 
 /**
  * This function should be able to be used for generation
@@ -175,6 +171,22 @@ const checkAdjacent = (cordX, cordY) => {
   // .2: Right invalid.
   // So something like 1.2 means up and right are invalid (top right corner.)
 
+}
+
+let playingGame = true;
+
+while (playingGame) {
+  const guess = prompt('guess some coords separated by a space, or say "flag" to set down a flag: ')
+  
+  if (guess == "flag") {
+    const flag = prompt("Where are you placing the flag in coords separated by a space: ")
+    const coords = flag.split(' ')
+    addFlag(coords[1]-1, coords[0]-1)
+  }
+  else {
+    const coords = guess.split(' ')
+    checkForBomb(Number(coords[1]) - 1, Number(coords[0]) - 1)
+  }
 }
 
 // checkForBomb(1,4)
